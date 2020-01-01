@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <title>We Dive Club</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+	<table border="1" cellpadding="10">
+	<thead><tr bgcolor="lightred"><td>ID</td><td>Name</td><td>Description</td><td>Price</td><td>Quantity</td></thead>
+	
+	<?php
+		$host = "localhost";
+		$user = "root";
+		$password = "";
+		$database = "test";
+		$query = "SELECT * FROM DIVING_PRODUCTS";
+		
+				
+		//OPEN CONNECTION TO THE DATABASE
+		$connection = mysqli_connect ($host, $user, $password, $database);
+		
+		//RUN QUERY AGAINST TABLE AND FETCH RESULT
+		$result_set = mysqli_query($connection, $query);
+		//$result = mysqli_fetch_assoc($result_set);
+		
+		//LOOP THROUGH RESULT SET AND PRINT DATA
+		//GET COUNT
+		$count = mysqli_num_rows ($result_set);
+		echo "There are " . $count . " rows <br/><br/>";
+		
+		//USE FOR LOOP 
+		for($i=0; $i<$count; $i++)
+		{
+			$result = mysqli_fetch_assoc($result_set);
+			echo "<tr>";
+			echo "<td>" . $result['ID'] . "</td>";
+			echo "<td>" . $result['Name'] . "</td>";
+			echo "<td>" . $result['Description'] . "</td>";
+			echo "<td>" . $result['Price'] . "</td>";
+			echo "<td>" . $result['Quantity'] . "</td>";
+			echo "</tr>";
+			
+					
+		}
+		
+			
+		//CLOSE THE CONNECTION
+		mysqli_close ($connection);
+		
+	
+	?>
+	
+	</table>
+  </body>
+</html>
